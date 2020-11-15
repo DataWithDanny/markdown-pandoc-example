@@ -1,0 +1,2483 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml" lang xml:lang>
+<head>
+  <meta charset="utf-8" />
+  <meta name="generator" content="pandoc" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes" />
+  <title>charlie-health</title>
+  <style>
+    code{white-space: pre-wrap;}
+    span.smallcaps{font-variant: small-caps;}
+    span.underline{text-decoration: underline;}
+    div.column{display: inline-block; vertical-align: top; width: 50%;}
+    div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+    ul.task-list{list-style: none;}
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { display: inline-block; line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      {   }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span.al { color: #ff0000; font-weight: bold; } /* Alert */
+    code span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+    code span.at { color: #7d9029; } /* Attribute */
+    code span.bn { color: #40a070; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #4070a0; } /* Char */
+    code span.cn { color: #880000; } /* Constant */
+    code span.co { color: #60a0b0; font-style: italic; } /* Comment */
+    code span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+    code span.do { color: #ba2121; font-style: italic; } /* Documentation */
+    code span.dt { color: #902000; } /* DataType */
+    code span.dv { color: #40a070; } /* DecVal */
+    code span.er { color: #ff0000; font-weight: bold; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #40a070; } /* Float */
+    code span.fu { color: #06287e; } /* Function */
+    code span.im { } /* Import */
+    code span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+    code span.kw { color: #007020; font-weight: bold; } /* Keyword */
+    code span.op { color: #666666; } /* Operator */
+    code span.ot { color: #007020; } /* Other */
+    code span.pp { color: #bc7a00; } /* Preprocessor */
+    code span.sc { color: #4070a0; } /* SpecialChar */
+    code span.ss { color: #bb6688; } /* SpecialString */
+    code span.st { color: #4070a0; } /* String */
+    code span.va { color: #19177c; } /* Variable */
+    code span.vs { color: #4070a0; } /* VerbatimString */
+    code span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+    .display.math{display: block; text-align: center; margin: 0.5rem auto;}
+  </style>
+  <style type="text/css">
+
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+display: block;
+}
+
+audio,
+canvas,
+video {
+display: inline-block;
+}
+
+audio:not([controls]) {
+display: none;
+height: 0;
+}
+
+[hidden],
+template {
+display: none;
+}
+
+
+html {
+font-family: sans-serif; 
+-ms-text-size-adjust: 100%; 
+-webkit-text-size-adjust: 100%; 
+}
+
+body {
+margin: 0;
+}
+
+
+a {
+background: transparent;
+}
+
+a:focus {
+outline: thin dotted;
+}
+
+a:active,
+a:hover {
+outline: 0;
+}
+
+
+h1 {
+font-size: 2em;
+margin: 0.67em 0;
+}
+
+abbr[title] {
+border-bottom: 1px dotted;
+}
+
+b,
+strong {
+font-weight: bold;
+}
+
+dfn {
+font-style: italic;
+}
+
+hr {
+-moz-box-sizing: content-box;
+box-sizing: content-box;
+height: 0;
+}
+
+mark {
+background: #ff0;
+color: #000;
+}
+
+code,
+kbd,
+pre,
+samp {
+font-family: monospace, serif;
+font-size: 1em;
+}
+
+pre {
+white-space: pre-wrap;
+}
+
+q {
+quotes: "\201C" "\201D" "\2018" "\2019";
+}
+
+small {
+font-size: 80%;
+}
+
+sub,
+sup {
+font-size: 75%;
+line-height: 0;
+position: relative;
+vertical-align: baseline;
+}
+sup {
+top: -0.5em;
+}
+sub {
+bottom: -0.25em;
+}
+
+
+img {
+border: 0;
+}
+
+svg:not(:root) {
+overflow: hidden;
+}
+
+
+figure {
+margin: 0;
+}
+
+
+fieldset {
+border: 1px solid #c0c0c0;
+margin: 0 2px;
+padding: 0.35em 0.625em 0.75em;
+}
+
+legend {
+border: 0; 
+padding: 0; 
+}
+
+button,
+input,
+select,
+textarea {
+font-family: inherit; 
+font-size: 100%; 
+margin: 0; 
+}
+
+button,
+input {
+line-height: normal;
+}
+
+button,
+select {
+text-transform: none;
+}
+
+button,
+html input[type="button"], 
+input[type="reset"],
+input[type="submit"] {
+-webkit-appearance: button; 
+cursor: pointer; 
+}
+
+button[disabled],
+html input[disabled] {
+cursor: default;
+}
+
+input[type="checkbox"],
+input[type="radio"] {
+box-sizing: border-box; 
+padding: 0; 
+}
+
+input[type="search"] {
+-webkit-appearance: textfield; 
+-moz-box-sizing: content-box;
+-webkit-box-sizing: content-box; 
+box-sizing: content-box;
+}
+
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+-webkit-appearance: none;
+}
+
+button::-moz-focus-inner,
+input::-moz-focus-inner {
+border: 0;
+padding: 0;
+}
+
+textarea {
+overflow: auto; 
+vertical-align: top; 
+}
+
+
+table {
+border-collapse: collapse;
+border-spacing: 0;
+}
+.go-top {
+position: fixed;
+bottom: 2em;
+right: 2em;
+text-decoration: none;
+background-color: #E0E0E0;
+font-size: 12px;
+padding: 1em;
+display: inline;
+}
+
+html,body{ margin: auto;
+padding-right: 1em;
+padding-left: 1em;
+max-width: 44em; color:black;}*:not('#mkdbuttons'){margin:0;padding:0}body{font:13.34px helvetica,arial,freesans,clean,sans-serif;-webkit-font-smoothing:subpixel-antialiased;line-height:1.4;padding:3px;background:#fff;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px}p{margin:1em 0}a{color:#4183c4;text-decoration:none}body{background-color:#fff;padding:30px;margin:15px;font-size:14px;line-height:1.6}body>*:first-child{margin-top:0!important}body>*:last-child{margin-bottom:0!important}@media screen{body{box-shadow:0 0 0 1px #cacaca,0 0 0 4px #eee}}h1,h2,h3,h4,h5,h6{margin:20px 0 10px;padding:0;font-weight:bold;-webkit-font-smoothing:subpixel-antialiased;cursor:text}h1{font-size:28px;color:#000}h2{font-size:24px;border-bottom:1px solid #ccc;color:#000}h3{font-size:18px;color:#333}h4{font-size:16px;color:#333}h5{font-size:14px;color:#333}h6{color:#777;font-size:14px}p,blockquote,table,pre{margin:15px 0}ul{padding-left:30px}ol{padding-left:30px}ol li ul:first-of-type{margin-top:0}hr{background:transparent url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAYAAAAECAYAAACtBE5DAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyJpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDUuMC1jMDYwIDYxLjEzNDc3NywgMjAxMC8wMi8xMi0xNzozMjowMCAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIENTNSBNYWNpbnRvc2giIHhtcE1NOkluc3RhbmNlSUQ9InhtcC5paWQ6OENDRjNBN0E2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiIHhtcE1NOkRvY3VtZW50SUQ9InhtcC5kaWQ6OENDRjNBN0I2NTZBMTFFMEI3QjRBODM4NzJDMjlGNDgiPiA8eG1wTU06RGVyaXZlZEZyb20gc3RSZWY6aW5zdGFuY2VJRD0ieG1wLmlpZDo4Q0NGM0E3ODY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIgc3RSZWY6ZG9jdW1lbnRJRD0ieG1wLmRpZDo4Q0NGM0E3OTY1NkExMUUwQjdCNEE4Mzg3MkMyOUY0OCIvPiA8L3JkZjpEZXNjcmlwdGlvbj4gPC9yZGY6UkRGPiA8L3g6eG1wbWV0YT4gPD94cGFja2V0IGVuZD0iciI/PqqezsUAAAAfSURBVHjaYmRABcYwBiM2QSA4y4hNEKYDQxAEAAIMAHNGAzhkPOlYAAAAAElFTkSuQmCC) repeat-x 0 0;border:0 none;color:#ccc;height:4px;padding:0}body>h2:first-child{margin-top:0;padding-top:0}body>h1:first-child{margin-top:0;padding-top:0}body>h1:first-child+h2{margin-top:0;padding-top:0}body>h3:first-child,body>h4:first-child,body>h5:first-child,body>h6:first-child{margin-top:0;padding-top:0}a:first-child h1,a:first-child h2,a:first-child h3,a:first-child h4,a:first-child h5,a:first-child h6{margin-top:0;padding-top:0}h1+p,h2+p,h3+p,h4+p,h5+p,h6+p,ul li>:first-child,ol li>:first-child{margin-top:0}dl{padding:0}dl dt{font-size:14px;font-weight:bold;font-style:italic;padding:0;margin:15px 0 5px}dl dt:first-child{padding:0}dl dt>:first-child{margin-top:0}dl dt>:last-child{margin-bottom:0}dl dd{margin:0 0 15px;padding:0 15px}dl dd>:first-child{margin-top:0}dl dd>:last-child{margin-bottom:0}blockquote{border-left:4px solid #DDD;padding:0 15px;color:#777}blockquote>:first-child{margin-top:0}blockquote>:last-child{margin-bottom:0}table{border-collapse:collapse;border-spacing:0;font-size:100%;font:inherit}table th{font-weight:bold;border:1px solid #ccc;padding:6px 13px}table td{border:1px solid #ccc;padding:6px 13px}table tr{border-top:1px solid #ccc;background-color:#fff}table tr:nth-child(2n){background-color:#f8f8f8}img{max-width:100%}code,tt{margin:0 2px;padding:0 5px;white-space:nowrap;border:1px solid #eaeaea;background-color:#f8f8f8;border-radius:3px;font-family:Consolas,'Liberation Mono',Courier,monospace;font-size:12px;color:#333}pre>code{margin:0;padding:0;white-space:pre;border:0;background:transparent}.highlight pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}pre{background-color:#f8f8f8;border:1px solid #ccc;font-size:13px;line-height:19px;overflow:auto;padding:6px 10px;border-radius:3px}pre code,pre tt{background-color:transparent;border:0}.poetry pre{font-family:Georgia,Garamond,serif!important;font-style:italic;font-size:110%!important;line-height:1.6em;display:block;margin-left:1em}.poetry pre code{font-family:Georgia,Garamond,serif!important;word-break:break-all;word-break:break-word;-webkit-hyphens:auto;-moz-hyphens:auto;hyphens:auto;white-space:pre-wrap}sup,sub,a.footnote{font-size:1.4ex;height:0;line-height:1;vertical-align:super;position:relative}sub{vertical-align:sub;top:-1px}@media print{body{background:#fff}img,pre,blockquote,table,figure{page-break-inside:avoid}body{background:#fff;border:0}code{background-color:#fff;color:#333!important;padding:0 .2em;border:1px solid #dedede}pre{background:#fff}pre code{background-color:white!important;overflow:visible}}@media screen{body.inverted{color:#eee!important;border-color:#555;box-shadow:none}.inverted body,.inverted hr .inverted p,.inverted td,.inverted li,.inverted h1,.inverted h2,.inverted h3,.inverted h4,.inverted h5,.inverted h6,.inverted th,.inverted .math,.inverted caption,.inverted dd,.inverted dt,.inverted blockquote{color:#eee!important;border-color:#555;box-shadow:none}.inverted td,.inverted th{background:#333}.inverted h2{border-color:#555}.inverted hr{border-color:#777;border-width:1px!important}::selection{background:rgba(157,193,200,0.5)}h1::selection{background-color:rgba(45,156,208,0.3)}h2::selection{background-color:rgba(90,182,224,0.3)}h3::selection,h4::selection,h5::selection,h6::selection,li::selection,ol::selection{background-color:rgba(133,201,232,0.3)}code::selection{background-color:rgba(0,0,0,0.7);color:#eee}code span::selection{background-color:rgba(0,0,0,0.7)!important;color:#eee!important}a::selection{background-color:rgba(255,230,102,0.2)}.inverted a::selection{background-color:rgba(255,230,102,0.6)}td::selection,th::selection,caption::selection{background-color:rgba(180,237,95,0.5)}.inverted{background:#0b2531;background:#252a2a}.inverted body{background:#252a2a}.inverted a{color:#acd1d5}}.highlight .c{color:#998;font-style:italic}.highlight .err{color:#a61717;background-color:#e3d2d2}.highlight .k,.highlight .o{font-weight:bold}.highlight .cm{color:#998;font-style:italic}.highlight .cp{color:#999;font-weight:bold}.highlight .c1{color:#998;font-style:italic}.highlight .cs{color:#999;font-weight:bold;font-style:italic}.highlight .gd{color:#000;background-color:#fdd}.highlight .gd .x{color:#000;background-color:#faa}.highlight .ge{font-style:italic}.highlight .gr{color:#a00}.highlight .gh{color:#999}.highlight .gi{color:#000;background-color:#dfd}.highlight .gi .x{color:#000;background-color:#afa}.highlight .go{color:#888}.highlight .gp{color:#555}.highlight .gs{font-weight:bold}.highlight .gu{color:#800080;font-weight:bold}.highlight .gt{color:#a00}.highlight .kc,.highlight .kd,.highlight .kn,.highlight .kp,.highlight .kr{font-weight:bold}.highlight .kt{color:#458;font-weight:bold}.highlight .m{color:#099}.highlight .s{color:#d14}.highlight .na{color:#008080}.highlight .nb{color:#0086b3}.highlight .nc{color:#458;font-weight:bold}.highlight .no{color:#008080}.highlight .ni{color:#800080}.highlight .ne,.highlight .nf{color:#900;font-weight:bold}.highlight .nn{color:#555}.highlight .nt{color:#000080}.highlight .nv{color:#008080}.highlight .ow{font-weight:bold}.highlight .w{color:#bbb}.highlight .mf,.highlight .mh,.highlight .mi,.highlight .mo{color:#099}.highlight .sb,.highlight .sc,.highlight .sd,.highlight .s2,.highlight .se,.highlight .sh,.highlight .si,.highlight .sx{color:#d14}.highlight .sr{color:#009926}.highlight .s1{color:#d14}.highlight .ss{color:#990073}.highlight .bp{color:#999}.highlight .vc,.highlight .vg,.highlight .vi{color:#008080}.highlight .il{color:#099}.highlight .gc{color:#999;background-color:#eaf2f5}.type-csharp .highlight .k,.type-csharp .highlight .kt{color:#00F}.type-csharp .highlight .nf{color:#000;font-weight:normal}.type-csharp .highlight .nc{color:#2b91af}.type-csharp .highlight .nn{color:#000}.type-csharp .highlight .s,.type-csharp .highlight .sc{color:#a31515}
+</style>
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<h1 id="health-analytics-case-study">Health Analytics Case Study</h1>
+<p>There are 2 datasets included in this case study:</p>
+<p><strong>users</strong></p>
+<p><strong>user_health_logs</strong></p>
+<h2 id="part-1">Part 1</h2>
+<p>What is the distribution (count) of health logs by datatype? What does this tell you about the data?</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true"></a><span class="kw">WITH</span> counts <span class="kw">AS</span> (</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true"></a>  datatype,</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> record_counts</span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> datatype, datatype_name</span>
+<span id="cb1-8"><a href="#cb1-8" aria-hidden="true"></a>)</span>
+<span id="cb1-9"><a href="#cb1-9" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb1-10"><a href="#cb1-10" aria-hidden="true"></a>  <span class="op">*</span>,</span>
+<span id="cb1-11"><a href="#cb1-11" aria-hidden="true"></a>  <span class="fu">ROUND</span>(</span>
+<span id="cb1-12"><a href="#cb1-12" aria-hidden="true"></a>    <span class="dv">100</span> <span class="op">*</span> record_counts:<span class="ch">:NUMERIC</span> <span class="op">/</span> <span class="fu">SUM</span>(record_counts)</span>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true"></a>    <span class="kw">OVER</span> ()</span>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true"></a>    , <span class="dv">2</span></span>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true"></a>   ) <span class="kw">AS</span> record_percentage</span>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true"></a><span class="kw">FROM</span> counts</span>
+<span id="cb1-17"><a href="#cb1-17" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> datatype;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>record_counts</th>
+<th>record_percentage</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>blood_glucose</td>
+<td>38692</td>
+<td>88.15</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>blood_pressure</td>
+<td>2417</td>
+<td>5.51</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>weight</td>
+<td>2782</td>
+<td>6.34</td>
+</tr>
+</tbody>
+</table>
+<p>~88% of values are from blood glucose measurements with the remaining split evenly between blood pressure and weight measurements.</p>
+<h2 id="part-2">Part 2</h2>
+<p>What is the average value for each datatype? Does anything here seem interesting or odd? Should we filter out any edge cases or anomalies?</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true"></a>  datatype,</span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true"></a>  <span class="fu">AVG</span>(measurementvalue) <span class="kw">as</span> average_value</span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true"></a>  datatype,</span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true"></a>  datatype_name</span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true"></a>  datatype</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>blood_glucose</td>
+<td>177.34859536245202</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>blood_pressure</td>
+<td>95.40408151269052</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>weight</td>
+<td>28786.846657296002</td>
+</tr>
+</tbody>
+</table>
+<p>Blood Glucose and Weight seem to be very high whilst we only seem to have one value for blood pressure.</p>
+<p>Further to this it seems that measurementvalue for blood pressure measures are the only records with valid data in the <code>bloodpressuresystolic</code> and <code>bloodpressurediastolic</code> columns.</p>
+<p>Instead we should split the dataset into datatype in (‘0’, ‘6’) for blood glucose and weight values and look at measurementvalue exclusively, whilst datatype = ‘4’ should inspect the two blood pressure columns.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb3-2"><a href="#cb3-2" aria-hidden="true"></a>  datatype,</span>
+<span id="cb3-3"><a href="#cb3-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb3-4"><a href="#cb3-4" aria-hidden="true"></a>  <span class="fu">AVG</span>(measurementvalue) <span class="kw">as</span> average_value</span>
+<span id="cb3-5"><a href="#cb3-5" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb3-6"><a href="#cb3-6" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb3-7"><a href="#cb3-7" aria-hidden="true"></a>  datatype <span class="kw">IN</span> (<span class="st">&#39;0&#39;</span>, <span class="st">&#39;6&#39;</span>)</span>
+<span id="cb3-8"><a href="#cb3-8" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb3-9"><a href="#cb3-9" aria-hidden="true"></a>  datatype,</span>
+<span id="cb3-10"><a href="#cb3-10" aria-hidden="true"></a>  datatype_name</span>
+<span id="cb3-11"><a href="#cb3-11" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb3-12"><a href="#cb3-12" aria-hidden="true"></a>  datatype</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>blood_glucose</td>
+<td>177.34859536245202</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>weight</td>
+<td>28786.846657296002</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb4"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true"></a>  datatype,</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb4-4"><a href="#cb4-4" aria-hidden="true"></a>  <span class="fu">AVG</span>(bloodpressuresystolic) <span class="kw">AS</span> average_systolic,</span>
+<span id="cb4-5"><a href="#cb4-5" aria-hidden="true"></a>  <span class="fu">AVG</span>(bloodpressurediastolic) <span class="kw">AS</span> average_diastolic</span>
+<span id="cb4-6"><a href="#cb4-6" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb4-7"><a href="#cb4-7" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb4-8"><a href="#cb4-8" aria-hidden="true"></a>  datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb4-9"><a href="#cb4-9" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb4-10"><a href="#cb4-10" aria-hidden="true"></a>  datatype,</span>
+<span id="cb4-11"><a href="#cb4-11" aria-hidden="true"></a>  datatype_name</span>
+<span id="cb4-12"><a href="#cb4-12" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb4-13"><a href="#cb4-13" aria-hidden="true"></a>  datatype</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_systolic</th>
+<th>average_diastolic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td>blood_pressure</td>
+<td>126.33926354985519</td>
+<td>79.5059991725279</td>
+</tr>
+</tbody>
+</table>
+<h3 id="naive-averages">Naive Averages</h3>
+<div class="line-block">Data Type Name | Average Measure |<br />
+BP Diastolic | 79.51 |<br />
+BP Systolic | 126.34 |<br />
+Blood Glucose | 177.35 |<br />
+Weight | 28,786.85 |</div>
+<h3 id="further-analysis-blood">Further Analysis Blood</h3>
+<h4 id="glucose-weight">Glucose &amp; Weight</h4>
+<p>If we go further and take a look at the highest records for each of these values - we can identify whether large outliers are impacting the averages of blood glucose and weight measures.</p>
+<div class="sourceCode" id="cb5"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true"></a><span class="kw">WITH</span> ranked_values <span class="kw">AS</span> (</span>
+<span id="cb5-2"><a href="#cb5-2" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb5-3"><a href="#cb5-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb5-4"><a href="#cb5-4" aria-hidden="true"></a>  measurementvalue,</span>
+<span id="cb5-5"><a href="#cb5-5" aria-hidden="true"></a>  <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (</span>
+<span id="cb5-6"><a href="#cb5-6" aria-hidden="true"></a>    <span class="kw">PARTITION</span> <span class="kw">BY</span> datatype_name <span class="kw">ORDER</span> <span class="kw">BY</span> measurementvalue <span class="kw">DESC</span></span>
+<span id="cb5-7"><a href="#cb5-7" aria-hidden="true"></a>  ) <span class="kw">as</span> value_rank</span>
+<span id="cb5-8"><a href="#cb5-8" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb5-9"><a href="#cb5-9" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb5-10"><a href="#cb5-10" aria-hidden="true"></a>    datatype <span class="kw">in</span> (<span class="st">&#39;0&#39;</span>, <span class="st">&#39;6&#39;</span>)</span>
+<span id="cb5-11"><a href="#cb5-11" aria-hidden="true"></a>)</span>
+<span id="cb5-12"><a href="#cb5-12" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ranked_values</span>
+<span id="cb5-13"><a href="#cb5-13" aria-hidden="true"></a><span class="kw">WHERE</span> value_rank <span class="op">&lt;=</span> <span class="dv">20</span></span>
+<span id="cb5-14"><a href="#cb5-14" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb5-15"><a href="#cb5-15" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb5-16"><a href="#cb5-16" aria-hidden="true"></a>  measurementvalue <span class="kw">DESC</span>;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype_name</th>
+<th>measurementvalue</th>
+<th>value_rank</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>227228</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>5400</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>4500</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>2268</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>2044.8</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>1944</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>1530</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>1494</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>1080</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>992</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>900</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>900</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>601.720675231</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>601.720675231</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>600</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>600</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>600</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>600</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>585.50661</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>573</td>
+<td>20</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>39642120</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>39642120</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>576484</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>200.487664</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>190.4</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>188.69427</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>186.8799</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>185.51913</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>175.086512</td>
+<td>9</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>173.725736</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>170.5506</td>
+<td>11</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>170.5506</td>
+<td>12</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>170.5506</td>
+<td>13</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>164</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>157.5778608</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>149.68536</td>
+<td>16</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>145.14944</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>144.242256</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>141.1578304</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>138.799152</td>
+<td>20</td>
+</tr>
+</tbody>
+</table>
+<p>Here it seems best to cutoff blood sugar at that 601.74 level as it looks like blood sugar levels higher than 600 can cause death and coma. For the weight values it seems alright to cut off the weight from the 200.48 level as the other weights are equivalent to 500 tonnes!</p>
+<p><strong>Lower Percentiles</strong></p>
+<p>Let’s also investigate the lower values also by taking a look at the total distribution by percentiles, specifically the first 5 percent of values in ascending order.</p>
+<p>The following query inspects the deciles to show the discrepancies for blood glucose and weight</p>
+<div class="sourceCode" id="cb6"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true"></a><span class="kw">WITH</span> percentile_values <span class="kw">AS</span> (</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true"></a>    datatype_name,</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true"></a>    measurementvalue,</span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true"></a>    <span class="fu">NTILE</span>(<span class="dv">100</span>) <span class="kw">OVER</span> (</span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true"></a>      <span class="kw">PARTITION</span> <span class="kw">BY</span> datatype_name</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true"></a>      <span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true"></a>        measurementvalue</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true"></a>    ) <span class="kw">AS</span> percentile</span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true"></a>  <span class="kw">FROM</span></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true"></a>    health.user_health_logs</span>
+<span id="cb6-12"><a href="#cb6-12" aria-hidden="true"></a>  <span class="kw">WHERE</span></span>
+<span id="cb6-13"><a href="#cb6-13" aria-hidden="true"></a>    datatype <span class="kw">in</span> (<span class="st">&#39;0&#39;</span>, <span class="st">&#39;6&#39;</span>)</span>
+<span id="cb6-14"><a href="#cb6-14" aria-hidden="true"></a>)</span>
+<span id="cb6-15"><a href="#cb6-15" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb6-16"><a href="#cb6-16" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb6-17"><a href="#cb6-17" aria-hidden="true"></a>  percentile,</span>
+<span id="cb6-18"><a href="#cb6-18" aria-hidden="true"></a>  <span class="fu">MIN</span>(measurementvalue) <span class="kw">AS</span> floor_value,</span>
+<span id="cb6-19"><a href="#cb6-19" aria-hidden="true"></a>  <span class="fu">MAX</span>(measurementvalue) <span class="kw">AS</span> ceiling_value,</span>
+<span id="cb6-20"><a href="#cb6-20" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> percentile_counts</span>
+<span id="cb6-21"><a href="#cb6-21" aria-hidden="true"></a><span class="kw">FROM</span></span>
+<span id="cb6-22"><a href="#cb6-22" aria-hidden="true"></a>  percentile_values</span>
+<span id="cb6-23"><a href="#cb6-23" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb6-24"><a href="#cb6-24" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb6-25"><a href="#cb6-25" aria-hidden="true"></a>  percentile</span>
+<span id="cb6-26"><a href="#cb6-26" aria-hidden="true"></a><span class="kw">HAVING</span> percentile <span class="op">&lt;=</span> <span class="dv">10</span></span>
+<span id="cb6-27"><a href="#cb6-27" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb6-28"><a href="#cb6-28" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb6-29"><a href="#cb6-29" aria-hidden="true"></a>  percentile;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>datatype_name</th>
+<th>percentile</th>
+<th>floor_value</th>
+<th>ceiling_value</th>
+<th>percentile_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>1</td>
+<td>-1</td>
+<td>57</td>
+<td>387</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>2</td>
+<td>57</td>
+<td>68</td>
+<td>387</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>3</td>
+<td>68</td>
+<td>75.6</td>
+<td>387</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>4</td>
+<td>75.6</td>
+<td>81</td>
+<td>387</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>5</td>
+<td>81</td>
+<td>84</td>
+<td>387</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>6</td>
+<td>84</td>
+<td>87</td>
+<td>387</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>7</td>
+<td>87</td>
+<td>90</td>
+<td>387</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>8</td>
+<td>90</td>
+<td>92</td>
+<td>387</td>
+</tr>
+<tr class="odd">
+<td>blood_glucose</td>
+<td>9</td>
+<td>92</td>
+<td>94</td>
+<td>387</td>
+</tr>
+<tr class="even">
+<td>blood_glucose</td>
+<td>10</td>
+<td>94</td>
+<td>96</td>
+<td>387</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>1</td>
+<td>0</td>
+<td>29.029888</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>2</td>
+<td>29.48348</td>
+<td>32.0689544</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>3</td>
+<td>32.205032</td>
+<td>35.380177</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>4</td>
+<td>35.380177</td>
+<td>36.74095</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>5</td>
+<td>36.74095</td>
+<td>37.194546</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>6</td>
+<td>37.194546</td>
+<td>38.101727</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>7</td>
+<td>38.101727</td>
+<td>39.00891</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>8</td>
+<td>39.00891</td>
+<td>40.36969</td>
+<td>28</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>9</td>
+<td>40.36969</td>
+<td>41.27687</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>10</td>
+<td>41.27687</td>
+<td>43.54483</td>
+<td>28</td>
+</tr>
+</tbody>
+</table>
+<h3 id="blood-glucose">Blood Glucose</h3>
+<p>Let’s dive deeper into that first percentile by taking a count of records by measurementvalue.</p>
+<div class="sourceCode" id="cb7"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true"></a>  <span class="fu">ROUND</span>(measurementvalue) <span class="kw">as</span> rounded_value,</span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> counts</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true"></a><span class="kw">FROM</span></span>
+<span id="cb7-5"><a href="#cb7-5" aria-hidden="true"></a>  health.user_health_logs</span>
+<span id="cb7-6"><a href="#cb7-6" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb7-7"><a href="#cb7-7" aria-hidden="true"></a>  datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb7-8"><a href="#cb7-8" aria-hidden="true"></a>  <span class="kw">AND</span> measurementvalue <span class="op">&lt;=</span> <span class="dv">57</span></span>
+<span id="cb7-9"><a href="#cb7-9" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb7-10"><a href="#cb7-10" aria-hidden="true"></a>  rounded_value</span>
+<span id="cb7-11"><a href="#cb7-11" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb7-12"><a href="#cb7-12" aria-hidden="true"></a>  rounded_value</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>rounded_value</th>
+<th>counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>-1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>0</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>5</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>37</td>
+</tr>
+<tr class="odd">
+<td>7</td>
+<td>33</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>9</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>12</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>33</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>39</td>
+<td>17</td>
+</tr>
+<tr class="even">
+<td>40</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>41</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>42</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>43</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>45</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>46</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>47</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>48</td>
+<td>9</td>
+</tr>
+<tr class="odd">
+<td>49</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>14</td>
+</tr>
+<tr class="odd">
+<td>51</td>
+<td>14</td>
+</tr>
+<tr class="even">
+<td>52</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>53</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td>54</td>
+<td>25</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>19</td>
+</tr>
+<tr class="even">
+<td>56</td>
+<td>22</td>
+</tr>
+<tr class="odd">
+<td>57</td>
+<td>27</td>
+</tr>
+</tbody>
+</table>
+<p>A quick Google shows that low blood sugar levels below 70mg/dL is low and can harm you, going under 20 can mean loss of consciousness and death!</p>
+<p>Let’s perhaps err on the safe side and just keep all values which are greater than 0.</p>
+<h3 id="weight-deep-dive">Weight Deep Dive</h3>
+<p>Let us do the same for the weight fields - this time using the 1st percentile cut off of 29kg</p>
+<div class="sourceCode" id="cb8"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true"></a>  <span class="fu">ROUND</span>(measurementvalue) <span class="kw">as</span> rounded_value,</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> counts</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true"></a><span class="kw">FROM</span></span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true"></a>  health.user_health_logs</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true"></a>  datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span></span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true"></a>  <span class="kw">AND</span> measurementvalue <span class="op">&lt;=</span> <span class="dv">29</span></span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true"></a>  rounded_value</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true"></a>  rounded_value</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>rounded_value</th>
+<th>counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>8</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>10</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>11</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>15</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>18</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>21</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>24</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>25</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>26</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>27</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>28</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>29</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+<p>It also seems prudent to only keep values which are positive here too.</p>
+<h3 id="blood-pressure-deep-dive">Blood Pressure Deep Dive</h3>
+<p>Let’s also complete the same analysis for blood pressure values using their respective columns.</p>
+<div class="sourceCode" id="cb9"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true"></a><span class="kw">WITH</span> systolic <span class="kw">AS</span> (</span>
+<span id="cb9-2"><a href="#cb9-2" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb9-3"><a href="#cb9-3" aria-hidden="true"></a>    <span class="st">&#39;systolic&#39;</span> <span class="kw">as</span> bp_measure,</span>
+<span id="cb9-4"><a href="#cb9-4" aria-hidden="true"></a>    bloodpressuresystolic <span class="kw">AS</span> bp_value,</span>
+<span id="cb9-5"><a href="#cb9-5" aria-hidden="true"></a>    <span class="fu">NTILE</span>(<span class="dv">10</span>) <span class="kw">OVER</span> (</span>
+<span id="cb9-6"><a href="#cb9-6" aria-hidden="true"></a>      <span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb9-7"><a href="#cb9-7" aria-hidden="true"></a>        bloodpressuresystolic</span>
+<span id="cb9-8"><a href="#cb9-8" aria-hidden="true"></a>    ) <span class="kw">AS</span> percentile</span>
+<span id="cb9-9"><a href="#cb9-9" aria-hidden="true"></a>  <span class="kw">FROM</span></span>
+<span id="cb9-10"><a href="#cb9-10" aria-hidden="true"></a>    health.user_health_logs</span>
+<span id="cb9-11"><a href="#cb9-11" aria-hidden="true"></a>  <span class="kw">WHERE</span></span>
+<span id="cb9-12"><a href="#cb9-12" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb9-13"><a href="#cb9-13" aria-hidden="true"></a>),</span>
+<span id="cb9-14"><a href="#cb9-14" aria-hidden="true"></a>diastolic <span class="kw">AS</span> (</span>
+<span id="cb9-15"><a href="#cb9-15" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb9-16"><a href="#cb9-16" aria-hidden="true"></a>    <span class="st">&#39;diastolic&#39;</span> <span class="kw">as</span> bp_measure,</span>
+<span id="cb9-17"><a href="#cb9-17" aria-hidden="true"></a>    bloodpressurediastolic <span class="kw">as</span> bp_value,</span>
+<span id="cb9-18"><a href="#cb9-18" aria-hidden="true"></a>    <span class="fu">NTILE</span>(<span class="dv">10</span>) <span class="kw">OVER</span> (</span>
+<span id="cb9-19"><a href="#cb9-19" aria-hidden="true"></a>      <span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb9-20"><a href="#cb9-20" aria-hidden="true"></a>        bloodpressurediastolic</span>
+<span id="cb9-21"><a href="#cb9-21" aria-hidden="true"></a>    ) <span class="kw">AS</span> percentile</span>
+<span id="cb9-22"><a href="#cb9-22" aria-hidden="true"></a>  <span class="kw">FROM</span></span>
+<span id="cb9-23"><a href="#cb9-23" aria-hidden="true"></a>    health.user_health_logs</span>
+<span id="cb9-24"><a href="#cb9-24" aria-hidden="true"></a>  <span class="kw">WHERE</span></span>
+<span id="cb9-25"><a href="#cb9-25" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb9-26"><a href="#cb9-26" aria-hidden="true"></a>)</span>
+<span id="cb9-27"><a href="#cb9-27" aria-hidden="true"></a>, bp_measures <span class="kw">AS</span> (</span>
+<span id="cb9-28"><a href="#cb9-28" aria-hidden="true"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> systolic</span>
+<span id="cb9-29"><a href="#cb9-29" aria-hidden="true"></a>  <span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb9-30"><a href="#cb9-30" aria-hidden="true"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> diastolic</span>
+<span id="cb9-31"><a href="#cb9-31" aria-hidden="true"></a>)</span>
+<span id="cb9-32"><a href="#cb9-32" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb9-33"><a href="#cb9-33" aria-hidden="true"></a>  bp_measure,</span>
+<span id="cb9-34"><a href="#cb9-34" aria-hidden="true"></a>  percentile,</span>
+<span id="cb9-35"><a href="#cb9-35" aria-hidden="true"></a>  <span class="fu">MIN</span>(bp_value) <span class="kw">AS</span> floor_value,</span>
+<span id="cb9-36"><a href="#cb9-36" aria-hidden="true"></a>  <span class="fu">MAX</span>(bp_value) <span class="kw">AS</span> ceiling_value,</span>
+<span id="cb9-37"><a href="#cb9-37" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">AS</span> percentile_counts</span>
+<span id="cb9-38"><a href="#cb9-38" aria-hidden="true"></a><span class="kw">FROM</span></span>
+<span id="cb9-39"><a href="#cb9-39" aria-hidden="true"></a>  bp_measures</span>
+<span id="cb9-40"><a href="#cb9-40" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb9-41"><a href="#cb9-41" aria-hidden="true"></a>  bp_measure,</span>
+<span id="cb9-42"><a href="#cb9-42" aria-hidden="true"></a>  percentile</span>
+<span id="cb9-43"><a href="#cb9-43" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb9-44"><a href="#cb9-44" aria-hidden="true"></a>  bp_measure,</span>
+<span id="cb9-45"><a href="#cb9-45" aria-hidden="true"></a>  percentile;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>bp_measure</th>
+<th>percentile</th>
+<th>floor_value</th>
+<th>ceiling_value</th>
+<th>percentile_counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>diastolic</td>
+<td>1</td>
+<td>1</td>
+<td>67</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>diastolic</td>
+<td>2</td>
+<td>67</td>
+<td>71</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>diastolic</td>
+<td>3</td>
+<td>71</td>
+<td>74</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>diastolic</td>
+<td>4</td>
+<td>74</td>
+<td>77</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>diastolic</td>
+<td>5</td>
+<td>77</td>
+<td>79</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>diastolic</td>
+<td>6</td>
+<td>79</td>
+<td>80</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>diastolic</td>
+<td>7</td>
+<td>80</td>
+<td>83</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>diastolic</td>
+<td>8</td>
+<td>83</td>
+<td>85</td>
+<td>241</td>
+</tr>
+<tr class="odd">
+<td>diastolic</td>
+<td>9</td>
+<td>85</td>
+<td>90</td>
+<td>241</td>
+</tr>
+<tr class="even">
+<td>diastolic</td>
+<td>10</td>
+<td>90</td>
+<td>1914</td>
+<td>241</td>
+</tr>
+<tr class="odd">
+<td>systolic</td>
+<td>1</td>
+<td>0</td>
+<td>103</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>systolic</td>
+<td>2</td>
+<td>103</td>
+<td>111</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>systolic</td>
+<td>3</td>
+<td>111</td>
+<td>117</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>systolic</td>
+<td>4</td>
+<td>117</td>
+<td>122</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>systolic</td>
+<td>5</td>
+<td>122</td>
+<td>126</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>systolic</td>
+<td>6</td>
+<td>126</td>
+<td>130</td>
+<td>242</td>
+</tr>
+<tr class="odd">
+<td>systolic</td>
+<td>7</td>
+<td>130</td>
+<td>135</td>
+<td>242</td>
+</tr>
+<tr class="even">
+<td>systolic</td>
+<td>8</td>
+<td>135</td>
+<td>140</td>
+<td>241</td>
+</tr>
+<tr class="odd">
+<td>systolic</td>
+<td>9</td>
+<td>140</td>
+<td>149</td>
+<td>241</td>
+</tr>
+<tr class="even">
+<td>systolic</td>
+<td>10</td>
+<td>149</td>
+<td>204</td>
+<td>241</td>
+</tr>
+</tbody>
+</table>
+<p>From initial inspection that 1914 max diastolic blood pressure seems out of place - let’s inspect that top percentile a bit further.</p>
+<div class="sourceCode" id="cb10"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb10-2"><a href="#cb10-2" aria-hidden="true"></a>  bloodpressuresystolic,</span>
+<span id="cb10-3"><a href="#cb10-3" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> counts</span>
+<span id="cb10-4"><a href="#cb10-4" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb10-5"><a href="#cb10-5" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb10-6"><a href="#cb10-6" aria-hidden="true"></a>  bloodpressuresystolic <span class="op">&lt;=</span> <span class="dv">103</span></span>
+<span id="cb10-7"><a href="#cb10-7" aria-hidden="true"></a>  <span class="kw">AND</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb10-8"><a href="#cb10-8" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> bloodpressuresystolic</span>
+<span id="cb10-9"><a href="#cb10-9" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> bloodpressuresystolic;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>bloodpressurediastolic</th>
+<th>counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1914</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>161</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>160</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>151</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>150</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>140</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>128</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>125</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>121</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>120</td>
+<td>11</td>
+</tr>
+<tr class="odd">
+<td>118</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>113</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>112</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>111</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>110</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>109</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>108</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>107</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>106</td>
+<td>5</td>
+</tr>
+<tr class="even">
+<td>105</td>
+<td>3</td>
+</tr>
+<tr class="odd">
+<td>104</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>102</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>101</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>100</td>
+<td>10</td>
+</tr>
+<tr class="odd">
+<td>99</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>98</td>
+<td>7</td>
+</tr>
+<tr class="odd">
+<td>97</td>
+<td>11</td>
+</tr>
+</tbody>
+</table>
+<p>This 1914 value looks out of place so it might be prudent to filter that out by putting a upper bound at 200 arbitrarily.</p>
+<p>Probably we can take a look further at the distribution of values in the bottom percentiles for both values just to confirm there is nothing amiss…</p>
+<div class="sourceCode" id="cb11"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb11-2"><a href="#cb11-2" aria-hidden="true"></a>  bloodpressurediastolic,</span>
+<span id="cb11-3"><a href="#cb11-3" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> counts</span>
+<span id="cb11-4"><a href="#cb11-4" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb11-5"><a href="#cb11-5" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb11-6"><a href="#cb11-6" aria-hidden="true"></a>  bloodpressurediastolic <span class="op">&gt;=</span> <span class="dv">90</span></span>
+<span id="cb11-7"><a href="#cb11-7" aria-hidden="true"></a>  <span class="kw">AND</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb11-8"><a href="#cb11-8" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> bloodpressurediastolic</span>
+<span id="cb11-9"><a href="#cb11-9" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> bloodpressurediastolic <span class="kw">DESC</span>;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>bloodpressuresystolic</th>
+<th>counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>12</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>13</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>67</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>80</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>81</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>83</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>84</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>85</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>86</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>87</td>
+<td>7</td>
+</tr>
+<tr class="even">
+<td>88</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>90</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>91</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>92</td>
+<td>8</td>
+</tr>
+<tr class="even">
+<td>93</td>
+<td>6</td>
+</tr>
+<tr class="odd">
+<td>94</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>95</td>
+<td>13</td>
+</tr>
+<tr class="odd">
+<td>96</td>
+<td>15</td>
+</tr>
+<tr class="even">
+<td>97</td>
+<td>27</td>
+</tr>
+<tr class="odd">
+<td>98</td>
+<td>10</td>
+</tr>
+<tr class="even">
+<td>99</td>
+<td>18</td>
+</tr>
+<tr class="odd">
+<td>100</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>101</td>
+<td>26</td>
+</tr>
+<tr class="odd">
+<td>102</td>
+<td>26</td>
+</tr>
+<tr class="even">
+<td>103</td>
+<td>31</td>
+</tr>
+</tbody>
+</table>
+<div class="sourceCode" id="cb12"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb12-2"><a href="#cb12-2" aria-hidden="true"></a>  bloodpressurediastolic,</span>
+<span id="cb12-3"><a href="#cb12-3" aria-hidden="true"></a>  <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> counts</span>
+<span id="cb12-4"><a href="#cb12-4" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb12-5"><a href="#cb12-5" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb12-6"><a href="#cb12-6" aria-hidden="true"></a>  bloodpressurediastolic <span class="op">&lt;=</span> <span class="dv">67</span></span>
+<span id="cb12-7"><a href="#cb12-7" aria-hidden="true"></a>  <span class="kw">AND</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb12-8"><a href="#cb12-8" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> bloodpressurediastolic</span>
+<span id="cb12-9"><a href="#cb12-9" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> bloodpressurediastolic;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>bloodpressurediastolic</th>
+<th>counts</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>8</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>31</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>36</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>42</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>44</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>46</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>50</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>51</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>53</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>55</td>
+<td>2</td>
+</tr>
+<tr class="even">
+<td>57</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>58</td>
+<td>3</td>
+</tr>
+<tr class="even">
+<td>59</td>
+<td>4</td>
+</tr>
+<tr class="odd">
+<td>60</td>
+<td>12</td>
+</tr>
+<tr class="even">
+<td>61</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>62</td>
+<td>24</td>
+</tr>
+<tr class="even">
+<td>63</td>
+<td>21</td>
+</tr>
+<tr class="odd">
+<td>64</td>
+<td>28</td>
+</tr>
+<tr class="even">
+<td>65</td>
+<td>33</td>
+</tr>
+<tr class="odd">
+<td>66</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>67</td>
+<td>55</td>
+</tr>
+</tbody>
+</table>
+<h3 id="conclusion">Conclusion</h3>
+<p>So to conclude: it looks like we can apply the following filters to the dataset accordingly</p>
+<p>Blood Glucose and Weight Values</p>
+<div class="sourceCode" id="cb13"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb13-2"><a href="#cb13-2" aria-hidden="true"></a>  datatype,</span>
+<span id="cb13-3"><a href="#cb13-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb13-4"><a href="#cb13-4" aria-hidden="true"></a>  <span class="fu">AVG</span>(measurementvalue) <span class="kw">as</span> average_value</span>
+<span id="cb13-5"><a href="#cb13-5" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb13-6"><a href="#cb13-6" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb13-7"><a href="#cb13-7" aria-hidden="true"></a>  (</span>
+<span id="cb13-8"><a href="#cb13-8" aria-hidden="true"></a>    <span class="co">-- glucose</span></span>
+<span id="cb13-9"><a href="#cb13-9" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb13-10"><a href="#cb13-10" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb13-11"><a href="#cb13-11" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&lt;</span> <span class="dv">602</span></span>
+<span id="cb13-12"><a href="#cb13-12" aria-hidden="true"></a>  )</span>
+<span id="cb13-13"><a href="#cb13-13" aria-hidden="true"></a>  <span class="kw">OR</span></span>
+<span id="cb13-14"><a href="#cb13-14" aria-hidden="true"></a>    (</span>
+<span id="cb13-15"><a href="#cb13-15" aria-hidden="true"></a>    <span class="co">-- weight</span></span>
+<span id="cb13-16"><a href="#cb13-16" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span></span>
+<span id="cb13-17"><a href="#cb13-17" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb13-18"><a href="#cb13-18" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&lt;</span> <span class="dv">201</span></span>
+<span id="cb13-19"><a href="#cb13-19" aria-hidden="true"></a>  )</span>
+<span id="cb13-20"><a href="#cb13-20" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb13-21"><a href="#cb13-21" aria-hidden="true"></a>  datatype,</span>
+<span id="cb13-22"><a href="#cb13-22" aria-hidden="true"></a>  datatype_name</span>
+<span id="cb13-23"><a href="#cb13-23" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb13-24"><a href="#cb13-24" aria-hidden="true"></a>  datatype</span></code></pre></div>
+<p><strong>Before adjustments</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>blood_glucose</td>
+<td>177.34859536245202</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>weight</td>
+<td>28786.846657296002</td>
+</tr>
+</tbody>
+</table>
+<p><strong>After adjustments</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>0</td>
+<td>blood_glucose</td>
+<td>170.97287506824213</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>weight</td>
+<td>80.76463831377048</td>
+</tr>
+</tbody>
+</table>
+<p>There is a huge change in the weight measure once these adjustments are made and a slight decrease in the blood glucose metric by a value of ~7 also.</p>
+<p>Let’s also do the same for the blood pressure values</p>
+<div class="sourceCode" id="cb14"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb14-2"><a href="#cb14-2" aria-hidden="true"></a>  datatype,</span>
+<span id="cb14-3"><a href="#cb14-3" aria-hidden="true"></a>  datatype_name,</span>
+<span id="cb14-4"><a href="#cb14-4" aria-hidden="true"></a>  <span class="fu">AVG</span>(bloodpressuresystolic) <span class="kw">AS</span> average_systolic,</span>
+<span id="cb14-5"><a href="#cb14-5" aria-hidden="true"></a>  <span class="fu">AVG</span>(bloodpressurediastolic) <span class="kw">AS</span> average_diastolic</span>
+<span id="cb14-6"><a href="#cb14-6" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb14-7"><a href="#cb14-7" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb14-8"><a href="#cb14-8" aria-hidden="true"></a>  datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb14-9"><a href="#cb14-9" aria-hidden="true"></a>  <span class="kw">AND</span> bloodpressurediastolic <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">AND</span> bloodpressuresystolic <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb14-10"><a href="#cb14-10" aria-hidden="true"></a>  <span class="kw">AND</span> bloodpressurediastolic <span class="op">&lt;</span> <span class="dv">200</span></span>
+<span id="cb14-11"><a href="#cb14-11" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span></span>
+<span id="cb14-12"><a href="#cb14-12" aria-hidden="true"></a>  datatype,</span>
+<span id="cb14-13"><a href="#cb14-13" aria-hidden="true"></a>  datatype_name</span>
+<span id="cb14-14"><a href="#cb14-14" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span></span>
+<span id="cb14-15"><a href="#cb14-15" aria-hidden="true"></a>  datatype</span></code></pre></div>
+<p><strong>Before Adjustments</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_systolic</th>
+<th>average_diastolic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td>blood_pressure</td>
+<td>126.33926354985519</td>
+<td>79.5059991725279</td>
+</tr>
+</tbody>
+</table>
+<p><strong>After adjustments</strong></p>
+<table>
+<thead>
+<tr class="header">
+<th>datatype</th>
+<th>datatype_name</th>
+<th>average_systolic</th>
+<th>average_diastolic</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>4</td>
+<td>blood_pressure</td>
+<td>126.39155629139073</td>
+<td>78.74668874172185</td>
+</tr>
+</tbody>
+</table>
+<p>Overall - it does not seem to make a huge difference for values after the adjustment.</p>
+<h2 id="part-3">Part 3</h2>
+<p>Median makes the most sense if we were to not apply any adjustments manually like above for all of the metrics.</p>
+<div class="sourceCode" id="cb15"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb15-1"><a href="#cb15-1" aria-hidden="true"></a><span class="kw">WITH</span> blood_glucose_data <span class="kw">AS</span> (</span>
+<span id="cb15-2"><a href="#cb15-2" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb15-3"><a href="#cb15-3" aria-hidden="true"></a>  <span class="st">&#39;blood glucose&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb15-4"><a href="#cb15-4" aria-hidden="true"></a>  <span class="fu">PERCENTILE_CONT</span>(<span class="fl">0.5</span>) WITHIN <span class="kw">GROUP</span>(</span>
+<span id="cb15-5"><a href="#cb15-5" aria-hidden="true"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> measurementvalue</span>
+<span id="cb15-6"><a href="#cb15-6" aria-hidden="true"></a>  ) <span class="kw">AS</span> median_value</span>
+<span id="cb15-7"><a href="#cb15-7" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb15-8"><a href="#cb15-8" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb15-9"><a href="#cb15-9" aria-hidden="true"></a>),</span>
+<span id="cb15-10"><a href="#cb15-10" aria-hidden="true"></a>weights_data <span class="kw">AS</span> (</span>
+<span id="cb15-11"><a href="#cb15-11" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb15-12"><a href="#cb15-12" aria-hidden="true"></a>  <span class="st">&#39;weight&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb15-13"><a href="#cb15-13" aria-hidden="true"></a>  <span class="fu">PERCENTILE_CONT</span>(<span class="fl">0.5</span>) WITHIN <span class="kw">GROUP</span>(</span>
+<span id="cb15-14"><a href="#cb15-14" aria-hidden="true"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> measurementvalue</span>
+<span id="cb15-15"><a href="#cb15-15" aria-hidden="true"></a>  ) <span class="kw">AS</span> median_value</span>
+<span id="cb15-16"><a href="#cb15-16" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb15-17"><a href="#cb15-17" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span></span>
+<span id="cb15-18"><a href="#cb15-18" aria-hidden="true"></a>),</span>
+<span id="cb15-19"><a href="#cb15-19" aria-hidden="true"></a>bp_diastolic_data <span class="kw">AS</span> (</span>
+<span id="cb15-20"><a href="#cb15-20" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb15-21"><a href="#cb15-21" aria-hidden="true"></a>  <span class="st">&#39;blood pressure diastolic&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb15-22"><a href="#cb15-22" aria-hidden="true"></a>  <span class="fu">PERCENTILE_CONT</span>(<span class="fl">0.5</span>) WITHIN <span class="kw">GROUP</span>(</span>
+<span id="cb15-23"><a href="#cb15-23" aria-hidden="true"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> bloodpressurediastolic</span>
+<span id="cb15-24"><a href="#cb15-24" aria-hidden="true"></a>  ) <span class="kw">AS</span> median_value</span>
+<span id="cb15-25"><a href="#cb15-25" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb15-26"><a href="#cb15-26" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb15-27"><a href="#cb15-27" aria-hidden="true"></a>),</span>
+<span id="cb15-28"><a href="#cb15-28" aria-hidden="true"></a>bp_systolic_data <span class="kw">AS</span> (</span>
+<span id="cb15-29"><a href="#cb15-29" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb15-30"><a href="#cb15-30" aria-hidden="true"></a>  <span class="st">&#39;blood pressure systolic&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb15-31"><a href="#cb15-31" aria-hidden="true"></a>  <span class="fu">PERCENTILE_CONT</span>(<span class="fl">0.5</span>) WITHIN <span class="kw">GROUP</span>(</span>
+<span id="cb15-32"><a href="#cb15-32" aria-hidden="true"></a>    <span class="kw">ORDER</span> <span class="kw">BY</span> bloodpressuresystolic</span>
+<span id="cb15-33"><a href="#cb15-33" aria-hidden="true"></a>  ) <span class="kw">AS</span> median_value</span>
+<span id="cb15-34"><a href="#cb15-34" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb15-35"><a href="#cb15-35" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb15-36"><a href="#cb15-36" aria-hidden="true"></a>)</span>
+<span id="cb15-37"><a href="#cb15-37" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> blood_glucose_data</span>
+<span id="cb15-38"><a href="#cb15-38" aria-hidden="true"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb15-39"><a href="#cb15-39" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> weights_data</span>
+<span id="cb15-40"><a href="#cb15-40" aria-hidden="true"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb15-41"><a href="#cb15-41" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> bp_diastolic_data</span>
+<span id="cb15-42"><a href="#cb15-42" aria-hidden="true"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb15-43"><a href="#cb15-43" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> bp_systolic_data</span>
+<span id="cb15-44"><a href="#cb15-44" aria-hidden="true"></a>;</span>
+<span id="cb15-45"><a href="#cb15-45" aria-hidden="true"></a></span>
+<span id="cb15-46"><a href="#cb15-46" aria-hidden="true"></a>|       measure_name       | median_value |</span>
+<span id="cb15-47"><a href="#cb15-47" aria-hidden="true"></a>| <span class="co">------------------------ | ------------ |</span></span>
+<span id="cb15-48"><a href="#cb15-48" aria-hidden="true"></a>| blood pressure systolic  |          <span class="dv">126</span> |</span>
+<span id="cb15-49"><a href="#cb15-49" aria-hidden="true"></a>| blood pressure diastolic |           <span class="dv">79</span> |</span>
+<span id="cb15-50"><a href="#cb15-50" aria-hidden="true"></a>| weight                   | <span class="fl">75.976721975</span> |</span>
+<span id="cb15-51"><a href="#cb15-51" aria-hidden="true"></a>| blood glucose            |          <span class="dv">154</span> |</span></code></pre></div>
+<p>Considerations would include the number of passes you’d have to perform over the dataset - in this PostgreSQL example - we had to calculate each median with a separate pass over the data which could be costly for multiple metrics.</p>
+<p>In our current example - we still would require 2 separate passes over the data as we are calculating averages for the weight &amp; blood glucose separately to the blood pressure values.</p>
+<p>In addition there is also a reduced sorting complexity for the average calculation - we do not need to do an implicit sorting process to rank order all values in each measure set to identifyh which is the middle value required for the median calculation. As the data increases in size - it will become more and more costly as there are more records to sort in order to calculate the median, as opposed to simply running the calculation in a single pass for the average.</p>
+<p>Applying the simple filters and then running the simple average calculation may be preferable in future for fast calculations at scale but will need to be monitored to ensure any underlying issues are identified and any filter rules updated to reflect these changes.</p>
+<h1 id="part-4---insights">Part 4 - Insights</h1>
+<p>When we look at the total distributions separately we can come up with some statistics about the user base in terms of averages, standard deviation values, specific percentiles such as 80th or 95th values to better understand where the majority of user measurements lie as well as maybe some correlation statistics with one value to another.</p>
+<p>Some example statistics could perhaps include:</p>
+<ul>
+<li>Median Values - calculated prior</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>measure_name</th>
+<th>median_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>blood pressure systolic</td>
+<td>126</td>
+</tr>
+<tr class="even">
+<td>blood pressure diastolic</td>
+<td>79</td>
+</tr>
+<tr class="odd">
+<td>weight</td>
+<td>75.976721975</td>
+</tr>
+<tr class="even">
+<td>blood glucose</td>
+<td>154</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Adjusted Mean Values - also calculated prior</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>measure_name</th>
+<th>average_value</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>blood glucose</td>
+<td>170.97287506824213</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>80.76463831377048</td>
+</tr>
+<tr class="odd">
+<td>bp diastolic</td>
+<td>78.74668874172185</td>
+</tr>
+<tr class="even">
+<td>bp systolic</td>
+<td>126.39155629139073</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>Standard Deviation (based off adjusted data)</li>
+</ul>
+<div class="sourceCode" id="cb16"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true"></a><span class="kw">WITH</span> adjusted_data <span class="kw">AS</span> (</span>
+<span id="cb16-2"><a href="#cb16-2" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> health.user_health_logs</span>
+<span id="cb16-3"><a href="#cb16-3" aria-hidden="true"></a><span class="kw">WHERE</span></span>
+<span id="cb16-4"><a href="#cb16-4" aria-hidden="true"></a>  (</span>
+<span id="cb16-5"><a href="#cb16-5" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb16-6"><a href="#cb16-6" aria-hidden="true"></a>      <span class="kw">AND</span> bloodpressurediastolic <span class="op">&gt;</span> <span class="dv">0</span> <span class="kw">AND</span> bloodpressuresystolic <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb16-7"><a href="#cb16-7" aria-hidden="true"></a>      <span class="kw">AND</span> bloodpressurediastolic <span class="op">&lt;</span> <span class="dv">200</span></span>
+<span id="cb16-8"><a href="#cb16-8" aria-hidden="true"></a>  )</span>
+<span id="cb16-9"><a href="#cb16-9" aria-hidden="true"></a>  <span class="kw">OR</span></span>
+<span id="cb16-10"><a href="#cb16-10" aria-hidden="true"></a>  (</span>
+<span id="cb16-11"><a href="#cb16-11" aria-hidden="true"></a>    <span class="co">-- glucose</span></span>
+<span id="cb16-12"><a href="#cb16-12" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb16-13"><a href="#cb16-13" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb16-14"><a href="#cb16-14" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&lt;</span> <span class="dv">602</span></span>
+<span id="cb16-15"><a href="#cb16-15" aria-hidden="true"></a>  )</span>
+<span id="cb16-16"><a href="#cb16-16" aria-hidden="true"></a>  <span class="kw">OR</span></span>
+<span id="cb16-17"><a href="#cb16-17" aria-hidden="true"></a>    (</span>
+<span id="cb16-18"><a href="#cb16-18" aria-hidden="true"></a>    <span class="co">-- weight</span></span>
+<span id="cb16-19"><a href="#cb16-19" aria-hidden="true"></a>    datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span></span>
+<span id="cb16-20"><a href="#cb16-20" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&gt;</span> <span class="dv">0</span></span>
+<span id="cb16-21"><a href="#cb16-21" aria-hidden="true"></a>    <span class="kw">AND</span> measurementvalue <span class="op">&lt;</span> <span class="dv">201</span></span>
+<span id="cb16-22"><a href="#cb16-22" aria-hidden="true"></a>  )</span>
+<span id="cb16-23"><a href="#cb16-23" aria-hidden="true"></a>),</span>
+<span id="cb16-24"><a href="#cb16-24" aria-hidden="true"></a>basic_measures_data <span class="kw">AS</span> (</span>
+<span id="cb16-25"><a href="#cb16-25" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb16-26"><a href="#cb16-26" aria-hidden="true"></a>  <span class="cf">CASE</span></span>
+<span id="cb16-27"><a href="#cb16-27" aria-hidden="true"></a>    <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;blood glucose&#39;</span></span>
+<span id="cb16-28"><a href="#cb16-28" aria-hidden="true"></a>    <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span> <span class="cf">THEN</span> <span class="st">&#39;weight&#39;</span></span>
+<span id="cb16-29"><a href="#cb16-29" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb16-30"><a href="#cb16-30" aria-hidden="true"></a>  <span class="fu">STDDEV</span>(measurementvalue) <span class="kw">AS</span> standard_deviation</span>
+<span id="cb16-31"><a href="#cb16-31" aria-hidden="true"></a><span class="kw">FROM</span> adjusted_data</span>
+<span id="cb16-32"><a href="#cb16-32" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="kw">in</span> (<span class="st">&#39;0&#39;</span>, <span class="st">&#39;6&#39;</span>)</span>
+<span id="cb16-33"><a href="#cb16-33" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
+<span id="cb16-34"><a href="#cb16-34" aria-hidden="true"></a>),</span>
+<span id="cb16-35"><a href="#cb16-35" aria-hidden="true"></a>bp_diastolic_data <span class="kw">AS</span> (</span>
+<span id="cb16-36"><a href="#cb16-36" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb16-37"><a href="#cb16-37" aria-hidden="true"></a>  <span class="st">&#39;blood pressure diastolic&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb16-38"><a href="#cb16-38" aria-hidden="true"></a>  <span class="fu">STDDEV</span>(bloodpressurediastolic) <span class="kw">AS</span> standard_deviation</span>
+<span id="cb16-39"><a href="#cb16-39" aria-hidden="true"></a><span class="kw">FROM</span> adjusted_data</span>
+<span id="cb16-40"><a href="#cb16-40" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb16-41"><a href="#cb16-41" aria-hidden="true"></a>),</span>
+<span id="cb16-42"><a href="#cb16-42" aria-hidden="true"></a>bp_systolic_data <span class="kw">AS</span> (</span>
+<span id="cb16-43"><a href="#cb16-43" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb16-44"><a href="#cb16-44" aria-hidden="true"></a>  <span class="st">&#39;blood pressure systolic&#39;</span> <span class="kw">AS</span> measure_name,</span>
+<span id="cb16-45"><a href="#cb16-45" aria-hidden="true"></a>  <span class="fu">STDDEV</span>(bloodpressuresystolic) <span class="kw">AS</span> standard_deviation</span>
+<span id="cb16-46"><a href="#cb16-46" aria-hidden="true"></a><span class="kw">FROM</span> adjusted_data</span>
+<span id="cb16-47"><a href="#cb16-47" aria-hidden="true"></a><span class="kw">WHERE</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span></span>
+<span id="cb16-48"><a href="#cb16-48" aria-hidden="true"></a>)</span>
+<span id="cb16-49"><a href="#cb16-49" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> basic_measures_data</span>
+<span id="cb16-50"><a href="#cb16-50" aria-hidden="true"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb16-51"><a href="#cb16-51" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> bp_diastolic_data</span>
+<span id="cb16-52"><a href="#cb16-52" aria-hidden="true"></a><span class="kw">UNION</span> <span class="kw">ALL</span></span>
+<span id="cb16-53"><a href="#cb16-53" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> bp_systolic_data</span>
+<span id="cb16-54"><a href="#cb16-54" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> measure_name</span>
+<span id="cb16-55"><a href="#cb16-55" aria-hidden="true"></a>;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>measure_name</th>
+<th>standard_deviation</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>blood glucose</td>
+<td>72.93649014636898</td>
+</tr>
+<tr class="even">
+<td>blood pressure diastolic</td>
+<td>10.687640614694873</td>
+</tr>
+<tr class="odd">
+<td>blood pressure systolic</td>
+<td>19.106041533614437</td>
+</tr>
+<tr class="even">
+<td>weight</td>
+<td>26.912715337488176</td>
+</tr>
+</tbody>
+</table>
+<p>There seems to be a much larger spread in the blood glucose levels compared to both blood pressure values. The weight also seems to fluctuate slightly more also.</p>
+<p>… TBC</p>
+<h2 id="part-5">Part 5</h2>
+<div class="sourceCode" id="cb17"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb17-2"><a href="#cb17-2" aria-hidden="true"></a>  t1.<span class="op">*</span>,</span>
+<span id="cb17-3"><a href="#cb17-3" aria-hidden="true"></a>  <span class="co">-- check columns</span></span>
+<span id="cb17-4"><a href="#cb17-4" aria-hidden="true"></a>  <span class="co">-- t2.min_glucose_range,</span></span>
+<span id="cb17-5"><a href="#cb17-5" aria-hidden="true"></a>  <span class="co">-- t2.max_glucose_range,</span></span>
+<span id="cb17-6"><a href="#cb17-6" aria-hidden="true"></a>  <span class="cf">CASE</span></span>
+<span id="cb17-7"><a href="#cb17-7" aria-hidden="true"></a>    <span class="cf">WHEN</span> t1.datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb17-8"><a href="#cb17-8" aria-hidden="true"></a>      <span class="kw">AND</span> t1.measurementvalue <span class="kw">between</span> t2.min_glucose_range <span class="kw">AND</span> t2.max_glucose_range</span>
+<span id="cb17-9"><a href="#cb17-9" aria-hidden="true"></a>      <span class="cf">THEN</span> <span class="kw">true</span></span>
+<span id="cb17-10"><a href="#cb17-10" aria-hidden="true"></a>    <span class="cf">WHEN</span> t1.datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb17-11"><a href="#cb17-11" aria-hidden="true"></a>      <span class="kw">AND</span> t1.measurementvalue <span class="kw">not</span> <span class="kw">between</span> t2.min_glucose_range <span class="kw">AND</span> t2.max_glucose_range</span>
+<span id="cb17-12"><a href="#cb17-12" aria-hidden="true"></a>      <span class="cf">THEN</span> <span class="kw">false</span></span>
+<span id="cb17-13"><a href="#cb17-13" aria-hidden="true"></a>    <span class="cf">ELSE</span> <span class="kw">NULL</span></span>
+<span id="cb17-14"><a href="#cb17-14" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">AS</span> is_bg_in_range</span>
+<span id="cb17-15"><a href="#cb17-15" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs t1</span>
+<span id="cb17-16"><a href="#cb17-16" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> health.users t2</span>
+<span id="cb17-17"><a href="#cb17-17" aria-hidden="true"></a><span class="kw">ON</span> t1.user_id <span class="op">=</span> t2.user_id</span></code></pre></div>
+<h2 id="part-6">Part 6</h2>
+<p>let’s add this new eA1C value into the table that we’ve already added in that <code>is_bg_in_range</code> column</p>
+<div class="sourceCode" id="cb18"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb18-2"><a href="#cb18-2" aria-hidden="true"></a>  t1.<span class="op">*</span>,</span>
+<span id="cb18-3"><a href="#cb18-3" aria-hidden="true"></a>  <span class="cf">CASE</span></span>
+<span id="cb18-4"><a href="#cb18-4" aria-hidden="true"></a>    <span class="cf">WHEN</span> t1.datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb18-5"><a href="#cb18-5" aria-hidden="true"></a>      <span class="kw">AND</span> t1.measurementvalue <span class="kw">between</span> t2.min_glucose_range <span class="kw">AND</span> t2.max_glucose_range</span>
+<span id="cb18-6"><a href="#cb18-6" aria-hidden="true"></a>      <span class="cf">THEN</span> <span class="kw">true</span></span>
+<span id="cb18-7"><a href="#cb18-7" aria-hidden="true"></a>    <span class="cf">WHEN</span> t1.datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb18-8"><a href="#cb18-8" aria-hidden="true"></a>      <span class="kw">AND</span> t1.measurementvalue <span class="kw">not</span> <span class="kw">between</span> t2.min_glucose_range <span class="kw">AND</span> t2.max_glucose_range</span>
+<span id="cb18-9"><a href="#cb18-9" aria-hidden="true"></a>      <span class="cf">THEN</span> <span class="kw">false</span></span>
+<span id="cb18-10"><a href="#cb18-10" aria-hidden="true"></a>    <span class="cf">ELSE</span> <span class="kw">NULL</span></span>
+<span id="cb18-11"><a href="#cb18-11" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">AS</span> is_bg_in_range,</span>
+<span id="cb18-12"><a href="#cb18-12" aria-hidden="true"></a>  <span class="cf">CASE</span></span>
+<span id="cb18-13"><a href="#cb18-13" aria-hidden="true"></a>    <span class="cf">WHEN</span> t1.datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span></span>
+<span id="cb18-14"><a href="#cb18-14" aria-hidden="true"></a>      <span class="cf">THEN</span> (t1.measurementvalue <span class="op">+</span> <span class="fl">46.7</span>) <span class="op">/</span> <span class="fl">28.7</span></span>
+<span id="cb18-15"><a href="#cb18-15" aria-hidden="true"></a>    <span class="cf">ELSE</span> <span class="kw">NULL</span></span>
+<span id="cb18-16"><a href="#cb18-16" aria-hidden="true"></a>    <span class="cf">END</span> <span class="kw">as</span> ea1c</span>
+<span id="cb18-17"><a href="#cb18-17" aria-hidden="true"></a><span class="kw">FROM</span> health.user_health_logs t1</span>
+<span id="cb18-18"><a href="#cb18-18" aria-hidden="true"></a><span class="kw">INNER</span> <span class="kw">JOIN</span> health.users t2</span>
+<span id="cb18-19"><a href="#cb18-19" aria-hidden="true"></a><span class="kw">ON</span> t1.user_id <span class="op">=</span> t2.user_id</span></code></pre></div>
+<h2 id="part-7">Part 7</h2>
+<p>First join all the data types and only return the records which appear in the first 2 weeks of the first_app_open timestamp.</p>
+<p>We simplify things by just looking for the interval of 14 days from that exact timestamp and also inspect just how many of these records exist for specific customers - we also take a look at the unique days so we can strategise how we will handle ties.</p>
+<div class="sourceCode" id="cb19"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true"></a><span class="kw">WITH</span> first_2_week_records <span class="kw">AS</span> (</span>
+<span id="cb19-2"><a href="#cb19-2" aria-hidden="true"></a>  <span class="kw">SELECT</span> t1.<span class="op">*</span></span>
+<span id="cb19-3"><a href="#cb19-3" aria-hidden="true"></a>  <span class="kw">FROM</span> health.user_health_logs t1</span>
+<span id="cb19-4"><a href="#cb19-4" aria-hidden="true"></a>  <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (</span>
+<span id="cb19-5"><a href="#cb19-5" aria-hidden="true"></a>    <span class="kw">SELECT</span> t2.user_id, t2.first_app_open</span>
+<span id="cb19-6"><a href="#cb19-6" aria-hidden="true"></a>    <span class="kw">FROM</span> health.users t2</span>
+<span id="cb19-7"><a href="#cb19-7" aria-hidden="true"></a>    <span class="kw">WHERE</span> t1.user_id <span class="op">=</span> t2.user_id</span>
+<span id="cb19-8"><a href="#cb19-8" aria-hidden="true"></a>    <span class="kw">AND</span> t1.display_date <span class="kw">BETWEEN</span> t2.first_app_open</span>
+<span id="cb19-9"><a href="#cb19-9" aria-hidden="true"></a>      <span class="kw">AND</span> t2.first_app_open <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">&#39;14 days&#39;</span></span>
+<span id="cb19-10"><a href="#cb19-10" aria-hidden="true"></a>  )</span>
+<span id="cb19-11"><a href="#cb19-11" aria-hidden="true"></a>),</span>
+<span id="cb19-12"><a href="#cb19-12" aria-hidden="true"></a>aggregated_counts <span class="kw">AS</span> (</span>
+<span id="cb19-13"><a href="#cb19-13" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb19-14"><a href="#cb19-14" aria-hidden="true"></a>    user_id,</span>
+<span id="cb19-15"><a href="#cb19-15" aria-hidden="true"></a>    datatype,</span>
+<span id="cb19-16"><a href="#cb19-16" aria-hidden="true"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> total_counts,</span>
+<span id="cb19-17"><a href="#cb19-17" aria-hidden="true"></a>    <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> display_date) <span class="kw">AS</span> unique_dates</span>
+<span id="cb19-18"><a href="#cb19-18" aria-hidden="true"></a>  <span class="kw">FROM</span> first_2_week_records</span>
+<span id="cb19-19"><a href="#cb19-19" aria-hidden="true"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></span>
+<span id="cb19-20"><a href="#cb19-20" aria-hidden="true"></a>)</span>
+<span id="cb19-21"><a href="#cb19-21" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb19-22"><a href="#cb19-22" aria-hidden="true"></a>  total_counts,</span>
+<span id="cb19-23"><a href="#cb19-23" aria-hidden="true"></a>  unique_dates,</span>
+<span id="cb19-24"><a href="#cb19-24" aria-hidden="true"></a>  datatype,</span>
+<span id="cb19-25"><a href="#cb19-25" aria-hidden="true"></a>  <span class="fu">COUNT</span>(user_id) <span class="kw">as</span> users</span>
+<span id="cb19-26"><a href="#cb19-26" aria-hidden="true"></a><span class="kw">FROM</span> aggregated_counts</span>
+<span id="cb19-27"><a href="#cb19-27" aria-hidden="true"></a><span class="kw">WHERE</span> unique_dates <span class="op">&lt;=</span> <span class="dv">3</span></span>
+<span id="cb19-28"><a href="#cb19-28" aria-hidden="true"></a><span class="kw">AND</span> total_counts <span class="op">&gt;=</span> <span class="dv">3</span></span>
+<span id="cb19-29"><a href="#cb19-29" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span></span>
+<span id="cb19-30"><a href="#cb19-30" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">3</span> <span class="kw">DESC</span></span>
+<span id="cb19-31"><a href="#cb19-31" aria-hidden="true"></a>;</span></code></pre></div>
+<p>There seems to be quite a small number of users with multiple counts on the same day according to this initial slice of the data.</p>
+<table>
+<thead>
+<tr class="header">
+<th>total_counts</th>
+<th>unique_dates</th>
+<th>datatype</th>
+<th>users</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>6</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+<td>6</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>14</td>
+<td>3</td>
+<td>6</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>2</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>3</td>
+<td>4</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>2</td>
+<td>0</td>
+<td>4</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+<td>0</td>
+<td>8</td>
+</tr>
+<tr class="odd">
+<td>4</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>4</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>5</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>5</td>
+<td>3</td>
+<td>0</td>
+<td>2</td>
+</tr>
+<tr class="odd">
+<td>6</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>6</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td>19</td>
+<td>3</td>
+<td>0</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td>90</td>
+<td>2</td>
+<td>0</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+<p>To handle ties - it seems easiest to just take a naiive row_number for the window function as opposed to a rank or dense_rank option.</p>
+<p>We could also take a look at averages on each day and roll it up as a more accurate alternative, but the question is not asking for this measure. We will take a summary count just to confirm that we did the right thing with our query.</p>
+<div class="sourceCode" id="cb20"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true"></a><span class="kw">WITH</span> ordered_first_2_week_records <span class="kw">AS</span> (</span>
+<span id="cb20-2"><a href="#cb20-2" aria-hidden="true"></a>  <span class="kw">SELECT</span> t1.<span class="op">*</span>,</span>
+<span id="cb20-3"><a href="#cb20-3" aria-hidden="true"></a>  <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> t1.user_id, t1.datatype <span class="kw">ORDER</span> <span class="kw">BY</span> t1.display_date) <span class="kw">as</span> record_number</span>
+<span id="cb20-4"><a href="#cb20-4" aria-hidden="true"></a>  <span class="kw">FROM</span> health.user_health_logs t1</span>
+<span id="cb20-5"><a href="#cb20-5" aria-hidden="true"></a>  <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (</span>
+<span id="cb20-6"><a href="#cb20-6" aria-hidden="true"></a>    <span class="kw">SELECT</span> t2.user_id, t2.first_app_open</span>
+<span id="cb20-7"><a href="#cb20-7" aria-hidden="true"></a>    <span class="kw">FROM</span> health.users t2</span>
+<span id="cb20-8"><a href="#cb20-8" aria-hidden="true"></a>    <span class="kw">WHERE</span> t1.user_id <span class="op">=</span> t2.user_id</span>
+<span id="cb20-9"><a href="#cb20-9" aria-hidden="true"></a>    <span class="kw">AND</span> t1.display_date <span class="kw">BETWEEN</span> t2.first_app_open</span>
+<span id="cb20-10"><a href="#cb20-10" aria-hidden="true"></a>      <span class="kw">AND</span> t2.first_app_open <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">&#39;14 days&#39;</span></span>
+<span id="cb20-11"><a href="#cb20-11" aria-hidden="true"></a>  )</span>
+<span id="cb20-12"><a href="#cb20-12" aria-hidden="true"></a>),</span>
+<span id="cb20-13"><a href="#cb20-13" aria-hidden="true"></a>top_3_records <span class="kw">AS</span> (</span>
+<span id="cb20-14"><a href="#cb20-14" aria-hidden="true"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ordered_first_2_week_records</span>
+<span id="cb20-15"><a href="#cb20-15" aria-hidden="true"></a>  <span class="kw">WHERE</span> record_number <span class="op">&lt;=</span> <span class="dv">3</span></span>
+<span id="cb20-16"><a href="#cb20-16" aria-hidden="true"></a>),</span>
+<span id="cb20-17"><a href="#cb20-17" aria-hidden="true"></a>aggregated_counts <span class="kw">AS</span> (</span>
+<span id="cb20-18"><a href="#cb20-18" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb20-19"><a href="#cb20-19" aria-hidden="true"></a>    user_id,</span>
+<span id="cb20-20"><a href="#cb20-20" aria-hidden="true"></a>    <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> datatype) <span class="kw">as</span> datatypes,</span>
+<span id="cb20-21"><a href="#cb20-21" aria-hidden="true"></a>    <span class="fu">COUNT</span>(<span class="op">*</span>) <span class="kw">as</span> total_counts,</span>
+<span id="cb20-22"><a href="#cb20-22" aria-hidden="true"></a>    <span class="fu">COUNT</span>(<span class="kw">DISTINCT</span> display_date) <span class="kw">AS</span> unique_dates</span>
+<span id="cb20-23"><a href="#cb20-23" aria-hidden="true"></a>  <span class="kw">FROM</span> top_3_records</span>
+<span id="cb20-24"><a href="#cb20-24" aria-hidden="true"></a>  <span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span></span>
+<span id="cb20-25"><a href="#cb20-25" aria-hidden="true"></a>)</span>
+<span id="cb20-26"><a href="#cb20-26" aria-hidden="true"></a><span class="kw">SELECT</span></span>
+<span id="cb20-27"><a href="#cb20-27" aria-hidden="true"></a>  total_counts,</span>
+<span id="cb20-28"><a href="#cb20-28" aria-hidden="true"></a>  unique_dates,</span>
+<span id="cb20-29"><a href="#cb20-29" aria-hidden="true"></a>  datatypes,</span>
+<span id="cb20-30"><a href="#cb20-30" aria-hidden="true"></a>  <span class="fu">COUNT</span>(user_id) <span class="kw">as</span> users</span>
+<span id="cb20-31"><a href="#cb20-31" aria-hidden="true"></a><span class="kw">FROM</span> aggregated_counts</span>
+<span id="cb20-32"><a href="#cb20-32" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span>,<span class="dv">2</span>,<span class="dv">3</span></span>
+<span id="cb20-33"><a href="#cb20-33" aria-hidden="true"></a><span class="kw">ORDER</span> <span class="kw">BY</span> <span class="dv">3</span> <span class="kw">DESC</span></span>
+<span id="cb20-34"><a href="#cb20-34" aria-hidden="true"></a>;</span></code></pre></div>
+<table>
+<thead>
+<tr class="header">
+<th>total_counts</th>
+<th>unique_dates</th>
+<th>users</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>1</td>
+<td>1</td>
+<td>52</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>2</td>
+<td>46</td>
+</tr>
+<tr class="odd">
+<td>3</td>
+<td>1</td>
+<td>40</td>
+</tr>
+<tr class="even">
+<td>3</td>
+<td>3</td>
+<td>27</td>
+</tr>
+<tr class="odd">
+<td>2</td>
+<td>2</td>
+<td>21</td>
+</tr>
+<tr class="even">
+<td>2</td>
+<td>1</td>
+<td>17</td>
+</tr>
+</tbody>
+</table>
+<p>This gives us confidence that we can apply the baseline averages to this dataset.</p>
+<div class="sourceCode" id="cb21"><pre class="sourceCode sql"><code class="sourceCode sql"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true"></a><span class="kw">WITH</span> ordered_first_2_week_records <span class="kw">AS</span> (</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true"></a>  <span class="kw">SELECT</span> t1.<span class="op">*</span>,</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true"></a>  <span class="fu">ROW_NUMBER</span>() <span class="kw">OVER</span> (<span class="kw">PARTITION</span> <span class="kw">BY</span> t1.user_id <span class="kw">ORDER</span> <span class="kw">BY</span> t1.display_date) <span class="kw">as</span> record_number</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true"></a>  <span class="kw">FROM</span> health.user_health_logs t1</span>
+<span id="cb21-5"><a href="#cb21-5" aria-hidden="true"></a>  <span class="kw">WHERE</span> <span class="kw">EXISTS</span> (</span>
+<span id="cb21-6"><a href="#cb21-6" aria-hidden="true"></a>    <span class="kw">SELECT</span> t2.user_id, t2.first_app_open</span>
+<span id="cb21-7"><a href="#cb21-7" aria-hidden="true"></a>    <span class="kw">FROM</span> health.users t2</span>
+<span id="cb21-8"><a href="#cb21-8" aria-hidden="true"></a>    <span class="kw">WHERE</span> t1.user_id <span class="op">=</span> t2.user_id</span>
+<span id="cb21-9"><a href="#cb21-9" aria-hidden="true"></a>    <span class="kw">AND</span> t1.display_date <span class="kw">BETWEEN</span> t2.first_app_open</span>
+<span id="cb21-10"><a href="#cb21-10" aria-hidden="true"></a>      <span class="kw">AND</span> t2.first_app_open <span class="op">+</span> <span class="dt">INTERVAL</span> <span class="st">&#39;14 days&#39;</span></span>
+<span id="cb21-11"><a href="#cb21-11" aria-hidden="true"></a>  )</span>
+<span id="cb21-12"><a href="#cb21-12" aria-hidden="true"></a>),</span>
+<span id="cb21-13"><a href="#cb21-13" aria-hidden="true"></a>top_3_records <span class="kw">AS</span> (</span>
+<span id="cb21-14"><a href="#cb21-14" aria-hidden="true"></a>  <span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> ordered_first_2_week_records</span>
+<span id="cb21-15"><a href="#cb21-15" aria-hidden="true"></a>  <span class="kw">WHERE</span> record_number <span class="op">&lt;=</span> <span class="dv">3</span></span>
+<span id="cb21-16"><a href="#cb21-16" aria-hidden="true"></a>),</span>
+<span id="cb21-17"><a href="#cb21-17" aria-hidden="true"></a>average_values <span class="kw">AS</span> (</span>
+<span id="cb21-18"><a href="#cb21-18" aria-hidden="true"></a>  <span class="kw">SELECT</span></span>
+<span id="cb21-19"><a href="#cb21-19" aria-hidden="true"></a>    user_id,</span>
+<span id="cb21-20"><a href="#cb21-20" aria-hidden="true"></a>    <span class="fu">AVG</span>(</span>
+<span id="cb21-21"><a href="#cb21-21" aria-hidden="true"></a>      <span class="cf">CASE</span> <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span> <span class="cf">THEN</span> measurementvalue <span class="cf">ELSE</span> <span class="kw">NULL</span> <span class="cf">END</span></span>
+<span id="cb21-22"><a href="#cb21-22" aria-hidden="true"></a>    ) <span class="kw">AS</span> blood_sugar,</span>
+<span id="cb21-23"><a href="#cb21-23" aria-hidden="true"></a>    <span class="fu">AVG</span>(</span>
+<span id="cb21-24"><a href="#cb21-24" aria-hidden="true"></a>      <span class="cf">CASE</span> <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;0&#39;</span> <span class="cf">THEN</span> (measurementvalue <span class="op">+</span> <span class="fl">46.7</span>) <span class="op">/</span> <span class="fl">28.7</span> <span class="cf">ELSE</span> <span class="kw">NULL</span> <span class="cf">END</span></span>
+<span id="cb21-25"><a href="#cb21-25" aria-hidden="true"></a>    ) <span class="kw">AS</span> ea1c,</span>
+<span id="cb21-26"><a href="#cb21-26" aria-hidden="true"></a>    <span class="fu">AVG</span>(</span>
+<span id="cb21-27"><a href="#cb21-27" aria-hidden="true"></a>      <span class="cf">CASE</span> <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;6&#39;</span> <span class="cf">THEN</span> measurementvalue <span class="cf">ELSE</span> <span class="kw">NULL</span> <span class="cf">END</span></span>
+<span id="cb21-28"><a href="#cb21-28" aria-hidden="true"></a>    ) <span class="kw">AS</span> weight,</span>
+<span id="cb21-29"><a href="#cb21-29" aria-hidden="true"></a>    <span class="fu">AVG</span>(</span>
+<span id="cb21-30"><a href="#cb21-30" aria-hidden="true"></a>      <span class="cf">CASE</span> <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span> <span class="cf">THEN</span> bloodpressurediastolic <span class="cf">ELSE</span> <span class="kw">NULL</span> <span class="cf">END</span></span>
+<span id="cb21-31"><a href="#cb21-31" aria-hidden="true"></a>    ) <span class="kw">AS</span> diastolic,</span>
+<span id="cb21-32"><a href="#cb21-32" aria-hidden="true"></a>    <span class="fu">AVG</span>(</span>
+<span id="cb21-33"><a href="#cb21-33" aria-hidden="true"></a>      <span class="cf">CASE</span> <span class="cf">WHEN</span> datatype <span class="op">=</span> <span class="st">&#39;4&#39;</span> <span class="cf">THEN</span> bloodpressuresystolic <span class="cf">ELSE</span> <span class="kw">NULL</span> <span class="cf">END</span></span>
+<span id="cb21-34"><a href="#cb21-34" aria-hidden="true"></a>    ) <span class="kw">AS</span> systolic</span>
+<span id="cb21-35"><a href="#cb21-35" aria-hidden="true"></a><span class="kw">FROM</span> top_3_records</span>
+<span id="cb21-36"><a href="#cb21-36" aria-hidden="true"></a><span class="kw">GROUP</span> <span class="kw">BY</span> <span class="dv">1</span></span>
+<span id="cb21-37"><a href="#cb21-37" aria-hidden="true"></a>)</span>
+<span id="cb21-38"><a href="#cb21-38" aria-hidden="true"></a><span class="kw">SELECT</span> <span class="op">*</span> <span class="kw">FROM</span> average_values;</span></code></pre></div>
+<p>8a</p>
+<p>We can inner join our users with benchmark values to the logs data to investigate their following records after their final display date used for the benchmark dataset. Since this might be a bit repetitive let’s just create a temporary table to refer back to this same dataset repeatedly.</p>
+<pre><code>CREATE TEMP TABLE benchmark_users AS
+WITH ordered_first_2_week_records AS (
+  SELECT t1.*,
+  ROW_NUMBER() OVER (PARTITION BY t1.user_id ORDER BY t1.display_date) as record_number
+  FROM health.user_health_logs t1
+  WHERE EXISTS (
+    SELECT t2.user_id, t2.first_app_open
+    FROM health.users t2
+    WHERE t1.user_id = t2.user_id
+    AND t1.display_date BETWEEN t2.first_app_open
+      AND t2.first_app_open + INTERVAL &#39;14 days&#39;
+  )
+),
+top_3_records AS (
+  SELECT * FROM ordered_first_2_week_records
+  WHERE record_number &lt;= 3
+),
+average_values AS (
+  SELECT
+    user_id,
+    AVG(
+      CASE WHEN datatype = &#39;0&#39; THEN measurementvalue ELSE NULL END
+    ) AS blood_sugar,
+    AVG(
+      CASE WHEN datatype = &#39;0&#39; THEN (measurementvalue + 46.7) / 28.7 ELSE NULL END
+    ) AS ea1c,
+    AVG(
+      CASE WHEN datatype = &#39;6&#39; THEN measurementvalue ELSE NULL END
+    ) AS weight,
+    AVG(
+      CASE WHEN datatype = &#39;4&#39; THEN bloodpressurediastolic ELSE NULL END
+    ) AS diastolic,
+    AVG(
+      CASE WHEN datatype = &#39;4&#39; THEN bloodpressuresystolic ELSE NULL END
+    ) AS systolic
+FROM top_3_records
+GROUP BY 1
+)
+SELECT * FROM average_values;
+
+-- next left join onto our logs dataset to get back all values to calculate weekly averages and medians for each metric
+CREATE TEMPORARY TABLE joint_dataset AS
+SELECT
+  t1.user_id,
+  t1.blood_sugar,
+  t1.ea1c,
+  t1.weight,
+  t1.diastolic,
+  t1.systolic,
+  CASE
+      WHEN t2.datatype = &#39;0&#39;
+        AND t2.measurementvalue between t3.min_glucose_range AND t3.max_glucose_range
+        THEN true
+      WHEN t2.datatype = &#39;0&#39;
+        AND t2.measurementvalue not between t3.min_glucose_range AND t3.max_glucose_range
+        THEN false
+      ELSE NULL
+      END AS is_bg_in_range,
+  DATE_TRUNC(&#39;week&#39;, t2.display_date) as start_of_week,
+  AVG(
+      CASE WHEN datatype = &#39;0&#39; THEN measurementvalue ELSE NULL END
+    ) AS blood_sugar_weekly,
+    AVG(
+      CASE WHEN datatype = &#39;0&#39; THEN (measurementvalue + 46.7) / 28.7 ELSE NULL END
+    ) AS ea1c_weekly,
+    AVG(
+      CASE WHEN datatype = &#39;6&#39; THEN measurementvalue ELSE NULL END
+    ) AS weight_weekly,
+    AVG(
+      CASE WHEN datatype = &#39;4&#39; THEN bloodpressurediastolic ELSE NULL END
+    ) AS diastolic_weekly,
+    AVG(
+      CASE WHEN datatype = &#39;4&#39; THEN bloodpressuresystolic ELSE NULL END
+    ) AS systolic_weekly
+FROM benchmark_users t1
+LEFT JOIN health.user_health_logs t2
+  ON t1.user_id = t2.user_id
+LEFT JOIN health.users t3
+  ON t1.user_id = t3.user_id
+GROUP BY
+  t1.user_id,
+  t1.blood_sugar,
+  t1.ea1c,
+  t1.weight,
+  t1.diastolic,
+  t1.systolic,
+  is_bg_in_range,
+  start_of_week;
+
+-- lastly compute all of the comparisons of each weekly metric against the benchmark values
+CREATE TEMPORARY TABLE comparison_results AS
+SELECT
+  user_id,
+  start_of_week,
+  is_bg_in_range,
+  blood_sugar_weekly / blood_sugar - 1 AS blood_sugar_comparison,
+  ea1c_weekly / ea1c - 1 AS ea1c_comparison,
+  weight_weekly / weight - 1 AS weight_comparison,
+  diastolic_weekly / diastolic - 1 AS diastolic_comparison,
+  systolic_weekly / systolic - 1 AS systolic_comparison
+FROM joint_dataset
+ORDER BY 1,2,3;
+
+a) 
+
+Got tired... but almost there...
+
+
+Timezone 
+
+```sql
+WITH base AS (
+select
+  current_time_zone,
+  COALESCE(
+    -- first match all time zones with more than 1 forward slash
+    (REGEXP_MATCH(current_time_zone, &#39;(\w+/\w+/\w+)&#39;))[1],
+    -- next match all single / timezones
+    -- need extra hyphen for second word regex to recognise port-au-prince
+    (REGEXP_MATCH(current_time_zone, &#39;(\w+/[\w-]+)&#39;))[1]
+  ) AS tz,
+  first_app_open
+from health.users
+)
+select *
+  ,TIMEZONE(tz, first_app_open)
+from base
+;</code></pre>
+</body>
+</html>
